@@ -9,10 +9,6 @@ let money = prompt ('Ваш месячный доход?'),
     expenses2 = prompt ('Введите обязательную статью расходов?'),
     amount2 = prompt ('Во сколько это обойдется?'),
     budgetMonth = (money - amount1 - amount2);
-console.log(budgetMonth);
-console.log(Math.ceil(mission / budgetMonth));
-let budgetDay = (Math.floor(budgetMonth / 30));
-console.log(budgetDay);
 console.log(typeof money);
 console.log(typeof income);
 console.log(typeof deposit);
@@ -24,15 +20,19 @@ console.log(money);
 console.log(addExpenses);
 console.log(deposit);
 
+console.log('Бюджет на месяц ' + budgetMonth);
+console.log('Цель будет достигнута через ' + Math.ceil(mission / budgetMonth) + ' месяцев');
+let budgetDay = (Math.floor(budgetMonth / 30));
+console.log('Бюджет на день ' + budgetDay);
 
 if (budgetDay >= 1200) {
-  alert('У вас высокий уровень дохода');
+  console.log('У вас высокий уровень дохода');
 } else if (budgetDay >= 600) {
-  alert('У вас средний уровень дохода');
+  console.log('У вас средний уровень дохода');
 } else if (budgetDay >= 0) {
-  alert('К сожалению у вас уровень дохода ниже среднего');
+  console.log('К сожалению у вас уровень дохода ниже среднего');
 } else {
-  alert('Что-то пошло не так');
+  console.log('Что-то пошло не так');
 }
 
 
