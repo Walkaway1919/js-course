@@ -1,85 +1,34 @@
-let isNumber = function(n){
-  return !isNaN(parseFloat(n)) && isFinite(n);
-};
+const arr = ['12345', '2345', '3456', '455', '45556', '788655', '23',];
+const newArr = arr.filter(num => num[0] === '2' || num[0] === '4');
+console.log(newArr);
 
-let money,
-    income = 'пособие по безработице',
-    addExpenses = prompt ('Перечислите возможные расходы за рассчитываемый период через запятую'),
-    deposit = confirm ('Есть ли у вас депозит в банке?'),
-    mission = 120000,
-    period = 5;
-
-
-let start = function(){
-  do {
-    money = prompt ('Ваш месячный доход?');
-  }while(!isNumber(money));
-};
-
-start();
-
-let showTypeOf = function(data){
-  console.log(data, typeof(data));
-};
-
-showTypeOf(money);
-showTypeOf(income);
-showTypeOf(deposit);
-
-let expenses1, expenses2;
-
-console.log('Возможные расходы ' + addExpenses.toLowerCase().split(', '));
-
-
-let getExpensesMonth = function(){
-  let sum = 0;
-  for (let i = 0; i < 2; i++){
-    if(i===0){
-      expenses1 = prompt('Введите обязательную статью расходов?');
-    } else if (i === 1){
-      expenses2 = prompt('Введите обязательную статью расходов?');
-    }
-    do {
-      temp = prompt ('Во сколько это обойдется?');
-    }while(!isNumber(temp));
-    sum += temp;
-  };
-  console.log(sum);
-  return sum;
-};
-
-let expensesAmount = getExpensesMonth();
-
-console.log('Расходы за месяц ' + expensesAmount);
-
-let getAccumulatedMonth = function(){
-  return parseInt(money) - expensesAmount;
-};
-
-let accumulatedMonth = getAccumulatedMonth();
-
-let getTargetMonth = function(){
-  return mission / accumulatedMonth;
-};
-
-let budgetDay = (Math.floor(accumulatedMonth / 30));
-console.log('Бюджет на день ' + budgetDay);
-
-let getStatusIncome = function(){
-  if (budgetDay >= 1200) {
-    console.log('У вас высокий уровень дохода');
-  } else if (budgetDay >= 600) {
-    console.log('У вас средний уровень дохода');
-  } else if (budgetDay >= 0) {
-    console.log('К сожалению у вас уровень дохода ниже среднего');
+//первый вариант
+function printNumber(i = 1){
+  checkDevisior( i );
+  if( i < 100 ) {
+    printNumber(++i);
   } else {
-    console.log('Что-то пошло не так');
+    return false;
   }
-};
-getStatusIncome();
-if (getTargetMonth() >0 ){
-  console.log('Цель будет достигнута через ' + Math.ceil(getTargetMonth()) + ' месяцев');
-  
-} else {
-  console.log('Цель не будет достигнута');
 }
+printNumber();
+
+function checkDevisior( i ){
+  for( let d = 2; d < i; d++ ){
+    if( i % d === 0 ) {
+      return false;
+    }
+  }
+  console.log(`${i} Делители этого числа: 1 и ${i}`)
+}
+
+//второй вариант
+let n = 100;
+
+nextPrime:
+for (let i2 = 2; i2 <= n; i2++) {
+  for (let d2 = 2; d2 < i2; d2++) {
+    if (i2 % d2 == 0) continue nextPrime;
+  }
+  console.log(`${i2} Делители этого числа: 1 и ${i2}`); 
+};
