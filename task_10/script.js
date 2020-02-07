@@ -75,6 +75,10 @@ let appData = {
 
       addExpensesBlock: function(){
           let cloneExpensesItem = expensesItems[0].cloneNode(true);
+          console.log( cloneExpensesItem.querySelectorAll('input') );
+          cloneExpensesItem.querySelectorAll('input').forEach(function(input){
+            input.value = '';
+          });
           expensesItems[0].parentNode.insertBefore(cloneExpensesItem, plusButtonsTwo);
           expensesItems = document.querySelectorAll('.expenses-items');
 
@@ -85,6 +89,9 @@ let appData = {
 
       addIncomeBlock: function(){
         let cloneIncomeItem = incomeItems[0].cloneNode(true);
+        cloneIncomeItem.querySelectorAll('input').forEach(function(input){
+          input.value = '';
+        });
         incomeItems[0].parentNode.insertBefore(cloneIncomeItem, plusButtonsOne);
         incomeItems = document.querySelectorAll('.income-items');
 
@@ -97,6 +104,8 @@ let appData = {
         expensesItems.forEach(function(item){
           let itemExpenses = item.querySelector('.expenses-title').value;
           let cashExpenses = item.querySelector('.expenses-amount').value;
+
+          
           if(itemExpenses !== '' && cashExpenses !== ''){
             appData.expenses[itemExpenses] = cashExpenses;
           }
@@ -208,6 +217,22 @@ let appData = {
       }
     });
 
+    document.addEventListener("input", function(e){
+      
+      if( e.target.placeholder == 'Наименование' ){
+        let regexp = /[^а-яА-Я\s\,\.]{0,}/g;
+        e.target.value = e.target.value.replace( regexp, "" );
+      }
+
+      if( e.target.placeholder == 'Сумма'){
+        let regexp = /[^\d]{0,}/g;
+        e.target.value = e.target.value.replace( regexp, "" );
+      }
+    });
+
+
+
+
 // if (appData.getTargetMonth() > 0){
 //   console.log('Цель будет достигнута за ' + Math.ceil(appData.getTargetMonth()) + ' месяца');
 // } else  {
@@ -230,4 +255,3 @@ appData.getInfoDeposit();
 // console.log(appData);
 // console.log("Расходы за месяц " + appData.expensesMonth);
 // console.log(appData.getStatusIncome());
-
